@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.main-container {
+    position: relative;
+}
+
+.content-container {
+    margin: 10px;
+}
+
+.header {
+    color: gray;
+    padding: 0px 10px;
+    background-color: #82d2d8b2;
+    border: 1px solid #00eeffde;
+}
+
+.modal {
+    position:fixed;
+    display:none;
+}
+
+.modal--visible {
+    display: block;
+}
+
+.A {
+    border: none;
+    display: inline-block;
+    color: white;
+    background-color: #008CBA;
+    padding: 5px 10px;
+}
+h1{
+    text-align: center;
+}

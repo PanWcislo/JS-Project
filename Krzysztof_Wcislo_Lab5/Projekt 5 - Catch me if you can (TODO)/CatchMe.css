@@ -1,0 +1,28 @@
+#map {
+    height:400px;
+    width:100%;
+}
+.location {
+    display: none; 
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+}
+.beg-for-location--visible {
+    display: flex;
+}
+.location_text {
+    padding: 10;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

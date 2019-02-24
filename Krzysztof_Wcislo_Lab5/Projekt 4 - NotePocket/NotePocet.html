@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="notepocet.css">
+    <script src="notepocet.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="main-container">
+        <header class="header">
+            <h1>NotePocket</h1>
+        </header>
+    
+        <div class="content-container">
+                <button type="button" class="A" id="newNote">Dodaj nową notatka</button>
+
+                <div id="addNote" class="modal">
+                    <div>
+                        Tytuł
+                        <input type="text" id="title">
+                    </div>
+                    <div>
+                        Treść
+                        <textarea id="description"></textarea>
+                    </div>
+                    <div>
+                        Kolor
+                        <input type="color" id="color">
+                    </div>
+                    <div>
+                        <input type="checkbox" id="attach"> Przypięta
+                    </div>
+                    <button type="button" class="B" id="addNoteButton">Zapisz</button>
+                </div>
+        </div>
+    </div>
+
+</body>
+</html>

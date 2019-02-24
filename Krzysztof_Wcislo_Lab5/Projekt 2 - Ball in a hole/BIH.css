@@ -1,0 +1,19 @@
+.ball {
+    border-radius: 100%;
+    background: radial-gradient(rgb(255, 255, 255), rgb(34, 34, 34));
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+.level {
+    background-color: rgba(18, 73, 1, 0.87);
+    width: 300px;
+    height: 500px;
+    position: relative;
+}
+.game {
+    background-color: rgb(100, 66, 46);
+    padding: 10px;
+}

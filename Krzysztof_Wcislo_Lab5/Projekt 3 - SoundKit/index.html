@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="drumkit.js"></script>
+
+    <style type = "text/css">
+        html{
+        background-repeat: no-repeat;
+        background-size: 100%;
+        -moz-background-size: 100% 100%;
+        background-image: url(tlo.jpg);
+        
+        }
+        button:focus {outline:0;}
+
+        .keys {
+        display:flex;
+        border-radius: 50px;
+        min-height:200px;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.205)
+        }
+        .key{
+        border:4px solid rgb(143, 10, 10);
+        border-radius:100px;
+        margin:1rem;
+        padding:2rem .6rem;
+        width:150px;
+        text-align: center;
+        color: rgb(255, 0, 0);
+        background:rgba(0, 0, 0, 0.8);
+        text-shadow:0 0 5px black;
+        float: left;
+        display: block;
+        }
+        .key:active{
+            transform:scale(1.3);
+            border-color:#ffc600;
+            box-shadow: 0 0 10px #ffc600;
+        }
+        kbd {
+        display: block;
+        font-size: 40px;
+        }
+        hide{
+            display: none;
+        }
+        #rec {
+        width: 180px;
+        height: 100px;
+        border: 5px solid #000;
+        background-color: rgb(143, 10, 10);
+        border-radius: 100px;
+        color: white;
+        margin: 10px;
+        float: left;
+        clear: both;
+        }
+        #rec:active{
+            border-color: rgb(143, 10, 10);
+        }
+        #play {
+        width: 180px;
+        height: 100px;
+        border: 5px solid #000;
+        background-color: rgb(121, 83, 151);
+        border-radius: 100px;
+        color: black;
+        margin: 10px;
+        float: left;
+        clear: both;
+        }
+        #play:active{
+            border-color: rgb(143, 10, 10);
+        }
+        .sound {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: rgb(143, 10, 10);
+        }
+        .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        height: 100vh;
+        flex-wrap: wrap;  
+        }
+        .all{
+            display: flex;
+        }
+        .channel-container{
+            font-size: 40px;
+            color: #000;
+            border-radius: 20px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.39);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="keys">
+            <button class="key" value="boom">
+                <kbd>A</kbd>
+                <span class="sound">BOOM</span>
+            </button>
+            <button class="key" value="clap">
+                <kbd>S</kbd>
+                <span class="sound">CLAP</span>
+            </button>
+            <button class="key" value="hihat">
+                <kbd>D</kbd>
+                <span class="sound">HIHAT</span>
+            </button>
+            <button class="key" value="kick">
+                <kbd>F</kbd>
+                <span class="sound">KICK</span>
+            </button>
+            <button class="key" value="openhat">
+                <kbd>G</kbd>
+                <span class="sound">OPENHAT</span>
+            </button>
+            <button class="key" value="ride">
+                <kbd>H</kbd>
+                <span class="sound">RIDE</span>
+            </button>
+            <button class="key" value="snare">
+                <kbd>J</kbd>
+                <span class="sound">SNARE</span>
+            </button>
+            <button class="key" value="tom">
+                <kbd>L</kbd>
+                <span class="sound">TOM</span>
+            </button>
+            <button class="key" value="tink">
+                <kbd>K</kbd>
+                <span class="sound">TINK</span>
+            </button>
+        </div>
+
+    <div class = "all">
+        <div class="control-container">
+            <button id="rec">Nagrywaj</button>
+            <button id="play">Odtwarzaj</button>
+        </div>
+
+        <div class="channel-container">
+            <div><input type="radio" name="channel" value="channel1" checked> Kanał 1</div>
+            <div><input type="radio" name="channel" value="channel2"> Kanał 2</div>
+            <div><input type="radio" name="channel" value="channel3"> Kanał 3</div>
+            <div><input type="radio" name="channel" value="channel4"> Kanał 4</div>
+        </div>
+    </div>
+
+    </div>
+     <div class="hide">
+        <audio src="sounds/boom.wav" controls id="boom"></audio>
+        <audio src="sounds/clap.wav" controls id="clap"></audio>
+        <audio src="sounds/hihat.wav" controls id="hihat"></audio>
+        <audio src="sounds/kick.wav" controls id="kick"></audio>
+        <audio src="sounds/openhat.wav" controls id="openhat"></audio>
+        <audio src="sounds/ride.wav" controls id="ride"></audio>
+        <audio src="sounds/snare.wav" controls id="snare"></audio>
+        <audio src="sounds/tom.wav" controls id="tom"></audio>
+        <audio src="sounds/tink.wav" controls id="tink"></audio>
+    </div>
+</body>
+</html>
