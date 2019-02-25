@@ -57,4 +57,14 @@ function startGame(){
 
 function drawBall(){
 
+    var grd = boardCTX.createRadialGradient(75, 50, 5, 90, 60, 100);
+    grd.addColorStop(0, "white");
+    grd.addColorStop(1, "black");
+
+    boardCTX.clearRect(0,0,board.width, board.height)
+    boardCTX.beginPath()
+    boardCTX.arc(bal.x, ball.y, ball.radius,0,)
+    boardCTX.fillStyle = grd;
+    boardCTX.fillRect(10, 10, 150, 100);
 }
+
