@@ -1,7 +1,7 @@
 body{
     margin: auto;
 }
-.ball {
+#ball {
     border-radius: 100%;
     background: radial-gradient(rgb(255, 255, 255), rgb(34, 34, 34));
     width: 40px;
@@ -10,14 +10,23 @@ body{
     bottom: 5px;
     left: 10px;
 }
-.board {
+#background-board {
     background-color: rgba(39, 158, 2, 0.87);
     position: relative;
     margin: 1%;
     width:98%;
     height:90%;
 }
-.app {
+#board{
+    margin: 1%;
+    width:98%;
+    height:90%;
+    z-index: 10;
+    position:absolute;
+    top: 0;
+    background: transparent;
+}
+#app {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -49,18 +58,18 @@ h2{
 
 }
 
-.timer{
+#timer{
     font-size: 60px;
     width:100%;
     height:10%;
-    top: 0;
     z-index: 100;
     line-height:100%;
     text-align: center;
+    position: absolute;
     background-color:rgba(185, 185, 185, 0.74);
 }
 
-.timer p{
+#timer p{
     display:inline;
 }
 button:focus {outline:0;}
