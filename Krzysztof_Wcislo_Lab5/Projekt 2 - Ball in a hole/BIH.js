@@ -107,8 +107,8 @@ function drawHoles(){
 function handleMove(e){
     if(gameStarted && (new Date().getTime() - time) < 120000){ // jesli czas gry mniejszy od 1 min
         //ponizszy kod zapobiega wychodzeniu kuli poza obszar planszy(board), dlatego minimalna wartosc to ball.radius, a maksymalna to width/height - ball.radius
-        ball.x = Math.min(Math.max(parseInt(ball.x+(e.gamma/ball.speedLimiter)),ball.radius),BD.width - ball.radius)
-        ball.y = Math.min(Math.max(parseInt(ball.y+(e.beta/ball.speedLimiter)),ball.radius),BD.height - ball.radius)
+        ball.x = Math.min(Math.max(parseInt(ball.x+(e.gamma/ball.speedLimiter)),ball.radius),board.width - ball.radius)
+        ball.y = Math.min(Math.max(parseInt(ball.y+(e.beta/ball.speedLimiter)),ball.radius),board.height - ball.radius)
 
         holeHit()
         refreshBoard() // odswiez planszę
