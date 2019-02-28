@@ -14,15 +14,21 @@
         <canvas id="background-board"></canvas>
         <canvas id = "board"></canvas>
     
-        <div id="timer">
-            Time: <p>00</p>:<p>00</p>
+        <div id = "footer">
+            <button id = "resetGame" onclick="endGame()">Reset Game</button>
+            <div id="Point">Score: </div>
+            <div id="timer">Time: <p>00</p>:<p>00</p></div>
+            <div id="bestTime">Best Time: </div>
         </div>
+
     </div>
 
     <div id="start">
         <h2>Czy jesteś gotowy aby rozpocząc grę ?</h2>
+        <br>
+        <h2>Na zdobycie 10 dołków masz 2 minuty... Zaczynajmy!</h2>
         <button id="StartApp">
-            PLAY
+            Play Game!
         </button>
     </div>
     

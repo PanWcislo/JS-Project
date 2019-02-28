@@ -4,15 +4,18 @@ body{
 #background-board {
     background-color: rgba(39, 158, 2, 0.87);
     position: relative;
-    margin-left: 5%;
-    margin-right: 5%;
-    width:90%;
-    height:90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    width:96%;
+    height:88%;
 }
 #board{
-    margin: 1%;
-    width:98%;
-    height:90%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    width:96%;
+    height:88%;
     z-index: 10;
     position:absolute;
     top: 0;
@@ -49,20 +52,61 @@ h2{
     color: white;
 
 }
-
-#timer{
-    
-    font-size: 5vh;
-    width:15%;
+#footer{
+    width:95%;
     height:10%;
+    margin: auto;
+}
+
+#timer{ 
+    float: left;
+    font-size: 5vh;
+    width:25%;
+    height:100%;
     z-index: 100;
     line-height:100%;
     text-align: center;
-    position: absolute;
+    background-color:rgba(185, 185, 185, 0.74);
+    border-right: 1px solid black;
+}
+#Point{
+    float: left;
+    font-size: 5vh;
+    width:25%;
+    height:100%;
+    z-index: 100;
+    line-height:100%;
+    text-align: center;
+    background-color:rgba(185, 185, 185, 0.74);
+    border-right: 1px solid black;
+}
+#bestTime{
+    float: left;
+    font-size: 5vh;
+    width:25%;
+    height:100%;
+    z-index: 100;
+    line-height:100%;
+    text-align: center;
     background-color:rgba(185, 185, 185, 0.74);
 }
-
+#resetGame{
+    float: left;
+    font-size: 5vh;
+    text-align: center;
+    width:24%;
+    height:100%;
+    background-color:rgba(185, 185, 185, 0.74);
+    border-right: 1px solid black;
+}
+#resetGame:hover{
+    background-color:rgba(185, 185, 185, 0.945);
+}
 #timer p{
     display:inline;
 }
 button:focus {outline:0;}
+button{
+    border: 0px;
+    padding: 0px;
+}

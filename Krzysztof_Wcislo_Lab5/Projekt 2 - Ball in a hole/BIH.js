@@ -3,17 +3,17 @@ let board,backgraund,backgraundCTX,boardCTX,timer
 let gameStarted = false;    // deklaracja zmiennych
 let time = 0
 let TimeOut
-let point = 0;
+let points = 0;
 
 let ball = {    // deklaracja kuli
     x:0,
     y:0,
-    radius:20,
-    speedLimiter: 4
+    radius:15,
+    speedLimiter: 1
 }
 
 //tablica do przechowywania współrzędnych wygenerowanych dołków
-let holeAmount = 20
+let holeAmount = 25
 let holes = []
 
 
@@ -55,9 +55,11 @@ function startGame(){
 
     time = new Date().getTime()
 
-    drawBall()
+    drawBall() // rysuj kule
     window.addEventListener('deviceorientation', (e) => {handleMove(e) })
-    updateTimer()
+    updateTimer() //aktualizacja czasu
+    document.getElementById('Point').innerHTML = "Score: " + "0" // punktacja startowa
+    document.getElementById('bestTime').innerHTML = "Best Time: " + "0" 
 }
 
 function drawBall(){
@@ -65,11 +67,11 @@ function drawBall(){
     boardCTX.clearRect(0,0,board.width, board.height)
     boardCTX.beginPath()
     boardCTX.arc(ball.x, ball.y, ball.radius,0,2*Math.PI)
-    boardCTX.fillStyle = "#CC3300"
-    boardCTX.fill()
+    boardCTX.fillStyle = "#DAA520" // kolor kuli
+    boardCTX.fill() //wypełnij
 }
 
-function createHoles(){
+function createHoles(){ //tworzenie dołków
     for(let i = 0; i < holeAmount; i++){
 
         let position = {x:0,y:0}
@@ -77,7 +79,7 @@ function createHoles(){
         position.x = Math.floor((Math.random()*(board.width - (2*ball.radius))) + ball.radius)
         position.y = Math.floor((Math.random()*(board.height - (2*ball.radius))) + ball.radius)
 
-        if(distanceBetweenCenter(position,ball) <= 2*ball.radius){ //dolek znajduje sie zbyt blisko piłki nastepuje ponowne losowanie 
+        if(distanceBetweenCenter(position,ball) <= 2 * ball.radius){ //dolek znajduje sie zbyt blisko piłki nastepuje ponowne losowanie 
             i--
         }else {
             holes.push({
@@ -88,14 +90,14 @@ function createHoles(){
     }
 }
 
-function drawHoles(){
+function drawHoles(){ //rysowanie dołków
     if(holes.length == 0)
     createHoles()
 
-    holes.forEach((el,i) => {
+    holes.forEach((a,b) => {
         backgraundCTX.beginPath()
-        backgraundCTX.arc(el.x,el.y, ball.radius*1.5,0,2*Math.PI)
-        if (i == 0){
+        backgraundCTX.arc(a.x,a.y, ball.radius*1.5,0,2*Math.PI)
+        if (b == 0){ // kolory dolków 
             backgraundCTX.fillStyle = "#FFF"   
         } else{
             backgraundCTX.fillStyle = "#000"
@@ -119,30 +121,30 @@ function handleMove(e){
 
 function holeHit(){
     let i = holes.findIndex((hole) => {
-        return distanceBetweenCenter(hole,ball) <= 1.5 * ball.radius
+        return distanceBetweenCenter(hole,ball) <= 1.5 * ball.radius 
     })
 
-    if(i === -1){}
-    else if(i === 0){
+    if(i === -1){} 
+    else if(i === 0){ //jesli kula wjedzie na biały dolek dodaje punkt
         getPoint()
     }else 
-        loseGame()
+        loseGame() // jesli wjedzie na czwerwony dolek konczy grę
 }
 
 function distanceBetweenCenter(obj1,obj2){
     return Math.sqrt(Math.pow(obj1.x-obj2.x,2)+Math.pow(obj1.y-obj2.y,2))
 }
 
-function refreshBoard(){
+function refreshBoard(){ // resetuj plansze
     boardCTX.clearRect(0,0,board.width, board.height)
     drawBall()
 }
 
-function refreshBackground(){
+function refreshBackground(){ // resetuj plansze
     backgraundCTX.clearRect(0,0,board.width,board.height)
     drawHoles()
 }
-function updateTimer(){
+function updateTimer(){ // aktualizacja czasu
     timeOut = setTimeout(()=>{
         let ms = new Date().getTime() - time
         let p = timer.children
@@ -152,40 +154,42 @@ function updateTimer(){
         p[0].textContent = s < 0 ? "" : s
         p[1].textContent = ms-(s*1000)
         updateTimer()
-    },50)
+    },70)
 }
 
-function getPoint(){
-    holes.shift()
-    refreshBackground()
+function getPoint(){ // dodaj punkt
+    holes.shift() // usuniecie pierwszego dołka z tablicy po czym nastepuje przeskok do nastepnego
+    refreshBackground() // reset planszy
 
-    points++
-    if(points >= 10){ winGame() }
+    points++ // dodanie punktu o 1
+    if(points >= 10){ winGame() } // jesli liczba punktów wynosi 10 nastepuje wygrana 
+    document.getElementById('Point').innerHTML = "Score: " + points // przypisanie ilosci punktów w apce
 }
 
 function winGame(){
-    alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ (new Date().getTime()-time) + "milisekund")
+    alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ (new Date().getTime()-time) + "milisekund") // informacja o wygranej i czasie 
     endGame()
 }
 
-function loseGame(){
+function loseGame(){ // funkcja wyswietlajaca komunikat o przegranej grze
     if(gameStarted){
         alert("Przegrałeś. Spróbuj ponownie!")
         endGame()
     }
 }
 
-function endGame(){
-    gameStarted = false
+function endGame(){ // koniec gry
+    gameStarted = false // zmiana statusy na false
 
-    document.querySelector("#start").style.display = "flex"
+    document.querySelector("#start").style.display = "flex" // wyswietlenie ekranu powitalnego
 
-    clearTimeout(timeOut)
+    clearTimeout(timeOut) // wyczyszczenie wszystkich zmiennych do stanu poczatkowego
     time = 0
     points = 0
     holes.length = 0
+    document.getElementById('Point').innerHTML = "Score: " + "0"
 
-    window.removeEventListener("deviceorientation", (e) => { handleMove(e) })
+    window.removeEventListener("deviceorientation", (e) => { handleMove(e) }) 
 
     boardCTX.clearRect(0,0,board.width,board.height)
     backgraundCTX.clearRect(0,0,board.width,board.height)
