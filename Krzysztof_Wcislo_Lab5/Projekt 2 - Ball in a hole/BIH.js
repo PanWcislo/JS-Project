@@ -13,7 +13,7 @@ let ball = {    // deklaracja kuli
 }
 
 //tablica do przechowywania współrzędnych wygenerowanych dołków
-let holeAmount = 25
+let holeAmount = 1
 let holes = []
 
 
@@ -56,10 +56,10 @@ function startGame(){
     time = new Date().getTime()
 
     drawBall() // rysuj kule
-    window.addEventListener('deviceorientation', (e) => {handleMove(e) })
+    window.addEventListener('deviceorientation', (e) => {Move(e) })
     updateTimer() //aktualizacja czasu
     document.getElementById('Point').innerHTML = "Score: " + "0" // punktacja startowa
-    document.getElementById('bestTime').innerHTML = "Best Time: " + "0" 
+    document.getElementById('bestTime').innerHTML = "Best Time: " + T
 }
 
 function drawBall(){
@@ -106,8 +106,8 @@ function drawHoles(){ //rysowanie dołków
     })
 }
 
-function handleMove(e){
-    if(gameStarted && (new Date().getTime() - time) < 120000){ // jesli czas gry mniejszy od 1 min
+function Move(e){
+    if(gameStarted && (new Date().getTime() - time) < 120000){ // jesli czas gry mniejszy od 2 min
         //ponizszy kod zapobiega wychodzeniu kuli poza obszar planszy(board), dlatego minimalna wartosc to ball.radius, a maksymalna to width/height - ball.radius
         ball.x = Math.min(Math.max(parseInt(ball.x+(e.gamma/ball.speedLimiter)),ball.radius),board.width - ball.radius)
         ball.y = Math.min(Math.max(parseInt(ball.y+(e.beta/ball.speedLimiter)),ball.radius),board.height - ball.radius)
@@ -167,7 +167,9 @@ function getPoint(){ // dodaj punkt
 }
 
 function winGame(){
-    alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ (new Date().getTime()-time) + "milisekund") // informacja o wygranej i czasie 
+    alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ ((new Date().getTime()-time) / 1000) + "sekund") // informacja o wygranej i czasie 
+    let T = document.getElementById('bestTime').innerHTML = "Best Time: " + ((new Date().getTime()-time) / 1000)
+
     endGame()
 }
 
@@ -176,6 +178,26 @@ function loseGame(){ // funkcja wyswietlajaca komunikat o przegranej grze
         alert("Przegrałeś. Spróbuj ponownie!")
         endGame()
     }
+}
+
+function resetGame(){ // koniec gry
+    gameStarted = false // zmiana statusy na false
+
+    document.querySelector("#start").style.display = "flex" // wyswietlenie ekranu powitalnego
+
+    clearTimeout(timeOut) // wyczyszczenie wszystkich zmiennych do stanu poczatkowego
+    time = 0
+    points = 0
+    holes.length = 0
+    document.getElementById('Point').innerHTML = "Score: " + "0"
+    document.getElementById('bestTime').innerHTML = "Best Time: " + "0"
+
+    window.removeEventListener("deviceorientation", (e) => { handleMove(e) }) 
+
+    boardCTX.clearRect(0,0,board.width,board.height)
+    backgraundCTX.clearRect(0,0,board.width,board.height)
+
+    console.log("... Game Ends")
 }
 
 function endGame(){ // koniec gry
@@ -188,6 +210,8 @@ function endGame(){ // koniec gry
     points = 0
     holes.length = 0
     document.getElementById('Point').innerHTML = "Score: " + "0"
+    document.getElementById('bestTime').innerHTML = "Best Time: " + T
+    
 
     window.removeEventListener("deviceorientation", (e) => { handleMove(e) }) 
 
