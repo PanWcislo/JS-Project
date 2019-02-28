@@ -1,8 +1,11 @@
 #map {
-    height:400px;
+    height:600px;
     width:100%;
 }
-.location {
+body{
+    background: url('tlo.jpg')
+}
+.beg-for-location {
     display: none; 
     justify-content: space-evenly;
     align-items: center;
@@ -16,7 +19,7 @@
 .beg-for-location--visible {
     display: flex;
 }
-.location_text {
+.beg-for-location_text {
     padding: 10;
     text-align: center;
     color: white;
