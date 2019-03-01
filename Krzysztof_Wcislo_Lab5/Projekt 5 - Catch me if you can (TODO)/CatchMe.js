@@ -1,151 +1,152 @@
-let socketKey = "asdq43823245isdf"; // filtrowanie wiadomości z websocket po tym kluczu
 let uluru, map, marker
-let ws;
+let ws
 let players = {}
-let nick = '1'
-let begForLocation = document.querySelector('.beg-for-location')
-let guid = parseInt(Date.now() + Math.random() * 1000) //identyfikator
-let icon = guid % 6 // numer obrazka
+let nick = 'Gracz1'
+let sendButton = document.querySelector('button');
+let msg;
+let flag=false;
+let guid = parseInt(Date.now() + Math.random() * 1000) // unikatowy identyfikator
+let icon = guid % 5 // numer obrazka
 
 
-ws = new WebSocket("ws://77.55.222.58:443")
+function search(e) {
+    if(event.key == 'Enter') {
+        sendMessage();      
+    }
+}
 
-function initMap()
-{
-    uluru = { lat: -25.363, lng: 131.044 }
-    map = new google.maps.Map(document.getElementById('map'),{
-        zoom: 12,
+function initMap() {
+    uluru = { lat: -25.363, lng: 131.044 };
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
         center: uluru,
         keyboardShortcuts: false
     });
+    
     marker = new google.maps.Marker({
-        position: uluru, 
-        map: map, 
-        icon: iconString(icon)}
-    );
-
+        position: uluru,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        icon: iconString(icon)
+    });
+    getLocalization()
+    startWebSocket()
+    watchKeys()
 }
 
-function getLocalization(){
-    navigator.geolocation.getCurrentPosition(geoYes, geoNo)
+
+function watchKeys() {
+    window.addEventListener('keydown', moveMarker)
 }
 
-function geoYes(data)
-{
-    begForLocation.classList.remove('beg-for-location--visible');
-    let coords = {
-        lat: data.coords.latitude,
-        lng: data.coords.longitude
-    };
-    placeMyMarker(coords, 'new')
-
-}
-
-function geoNo(data)
-{
-    begForLocation.classList.add('beg-for-location--visible');
-}
-function goKeys(){
-    document.addEventListener('keydown', moveMarker)
-}
-
-function moveMarker(e){
+function moveMarker(ev) {
     let coords = {
         lat: marker.getPosition().lat(),
         lng: marker.getPosition().lng()
     }
 
-    switch(e.key)
-    {
+    switch (ev.code) {
         case 'ArrowUp':
-            coords.lat += 0.001
+            coords.lat += 0.02
             break;
         case 'ArrowDown':
-            coords.lat -= 0.001
+            coords.lat -= 0.02
             break;
         case 'ArrowLeft':
-            coords.lng -= 0.001
+            coords.lng -= 0.02
             break;
         case 'ArrowRight':
-            coords.lng += 0.001
+            coords.lng += 0.02
             break;
         default:
             break;
     }
-    MyMarker(coords, 'move')
+    placeMyMarker(coords, 'move')
 }
 
-function MyMarker(myCoords, myAction){
-    marker.setPosition(myCoords)
-    map.setConter(myCoords)
+function placeMyMarker(_coords, _action)
+{
+    marker.setPosition(_coords)
+    map.setCenter(_coords)
 
     let me = {
         id: guid,
-        action: myAction,
-        coords: myCoords,
+        action: _action,
+        coords: _coords,
         playericon: icon
     }
 
     sendMessage(me)
 }
-
-function sendMessage(e)
-{
-    ws.send(socketKey + JSON.stringify(e))
+function startWebSocket() {
+    let url = 'ws://91.121.6.192:8010'
+    ws = new WebSocket(url)
+    ws.addEventListener('open', onWSOpen)
+    ws.addEventListener('message', onWSMessage)
 }
 
-function takeMessage(MSG){
+function onWSOpen(data) {
+    console.log(data)
+}
 
-    if(MSG.substring(0, socketKey.length) == socketKey)
-    {
-        MSG - MSG.substring(socketKey.length)
-        MSG. JSON.parse(MSG)
-        console.log(MSG)
-        if(MSG.id != guid){
+function sendMessage(){
+    let text = document.getElementById('text');
+    let nickname = document.getElementById('nick').value;
+    textToSend=nickname+": "+text.value;
+    msg = { typ: 'msg', tekst: textToSend };
+    ws.send(JSON.stringify(msg));
+    text.value="";
+}
 
-            if(MSG.action == "new"){
-                players[MSG.id] = new google.maps.Marker({
-                    position: MSG.coords, 
-                    map: map, 
-                    icon: iconString(MSG.playericon)
-                });
-            }
-            if (MSG.action == "move"){
+function onWSMessage(e) {
+    let log = document.getElementById('log');
 
-                if(players[MSG.id])
-                    players[MSG.id].setPosition(MSG.coords);
-                else 
-                players[MSG.id] = new google.maps.Marker({
-                    position: MSG.coords, 
-                    map: map, 
-                    icon: iconString(MSG.playericon)}
-                );
-            }
-            if(MSG.action == "close"){
-                players[MSG.id].setMap(null)
-            }
+    msg=(JSON.parse(e.data));
+    if(msg.typ=='msg'){
+        log.innerHTML+=(msg.tekst)+"<br/>";
+    }
+
+    else{
+        let data = JSON.parse(e.data)
+
+        if (!players['user' + data.id]) {
+            players['user' + data.id] = new google.maps.Marker({
+                position: { lat: data.lat, lng: data.lng },
+                map: map,
+                animation: google.maps.Animation.DROP
+            })
+        } else {
+            players['user' + data.id].setPosition({
+                lat: data.lat,
+                lng: data.lng
+            })
         }
     }
+        
+    
+
+    
 }
 
-getLocalization()
 
-goKeys()
+function getLocalization() {
+    navigator.geolocation.getCurrentPosition(geoOk, geoFail)
 
-
-ws.onmessage = function(e){
-    let message = e.data
-    receiveMessage(message)
 }
 
-window.onbeforeunload = function(e){
-    sendMessage({
-        id: guid,
-        action: "close"
-    })
+function geoOk(data) {
+    let coords = {
+        lat: data.coords.latitude,
+        lng: data.coords.longitude
+    }
+    placeMyMarker(coords, 'new')
 }
 
-function iconString(nr)
+function geoFail(err) {
+    console.log(err)
+}
+
+function iconString(number)
 {
-    return `icon/${nr}.png`
+    return `icon/${number}.png`
 }

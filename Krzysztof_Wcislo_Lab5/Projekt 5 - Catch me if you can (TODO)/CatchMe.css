@@ -1,31 +1,45 @@
-#map {
-    height:600px;
-    width:100%;
+#map{
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
 }
+#row1{
+    width: 35%;
+    height: 100%;
+    float: left;
+    margin: 10px;
+}
+#row2{
+    width: 59%;
+    height: 100%;
+    margin: 10px;
+    float: left;
+}
+#log{
+    width: 100%;
+    height: 75%;
+    border: 5px solid black;
+    border-radius:10px;
+    overflow-y:scroll;
+    background-color: rgba(255, 254, 254, 0.5);
+}
+#send{
+    margin: 15px;
+    font-size: 20px;
+}
+
 body{
-    background: url('tlo.jpg')
+    margin: 5px;
+    background: url('tlo.jpg');
 }
-.beg-for-location {
-    display: none; 
-    justify-content: space-evenly;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.75);
+.container{
+    width: 70%;
+    margin: 0 auto;
+    height: 700px;
 }
-.beg-for-location--visible {
-    display: flex;
-}
-.beg-for-location_text {
-    padding: 10;
+h3{
     text-align: center;
-    color: white;
-    font-size: 2em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    margin: 10px;
+    font-size: 30px;
+    text-decoration-color: aliceblue;
 }
