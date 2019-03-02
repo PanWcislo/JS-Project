@@ -12,14 +12,31 @@
         <div id = "row1">
             <div id="log"></div>
             <div id="send">
-                <input type="text" id="nick" placeholder="Your NickName">
-                    <br/><br/>
-                <input type="text" id="text" placeholder="Your Message">
+                <input type="text" id="nick" placeholder="Your NickName">   
+                <input type = "text" id = "text" placeholder="Your Message" onkeydown="search(this)">
                 <button onclick="sendMessage()">Send</button>
             </div>
         </div>
         <div id = "row2">
             <div id="map"></div>
+        </div>
+        <div class = "location">
+            <div class = "text_location">
+                <h5>Ta strona potrzebuje twojej lokalizacji do działania, zezwól na sprawdzenie jej i ciesz sie zabawą :)</h5>
+            <div class = "text_location_fail"><h4>Nie chcesz spróbowac ? Nawet nie zartuj :) <br>Wyczyść ustawienia lokalizacji i odswież stronę</h5></div> 
+            </div>
+        </div>
+        <div class = "avatar">
+            <form id="MyAvatar" method="get">
+                    <h3>Wybierz swojego avatara:</h3>
+                <input type="radio" name="avatar" id="0" value="0" checked="checked"> <img src="icon/0.png" alt=""> <br>
+                <input type="radio" name="avatar" id="1" value="1"> <img src="icon/1.png" alt=""><br>
+                <input type="radio" name="avatar" id="2" value="2"> <img src="icon/2.png" alt=""><br>
+                <input type="radio" name="avatar" id="3" value="3"> <img src="icon/3.png" alt=""><br>
+                <input type="radio" name="avatar" id="4" value="4"> <img src="icon/4.png" alt=""><br>
+                <input type="radio" name="avatar" id="5" value="5"> <img src="icon/5.png" alt=""><br>
+                <input onclick="avatar()" type="button" value="Submit">
+            </form>
         </div>
     </div>
     <script src="CatchMe.js"></script>    

@@ -32,6 +32,7 @@ function initMap() {
     getLocalization()
     startWebSocket()
     watchKeys()
+    document.querySelector(".location").style.display = "flex"
 }
 
 
@@ -76,10 +77,9 @@ function placeMyMarker(_coords, _action)
         playericon: icon
     }
 
-    sendMessage(me)
 }
 function startWebSocket() {
-    let url = 'ws://91.121.6.192:8010'
+    let url = 'ws://77.55.222.58:443'
     ws = new WebSocket(url)
     ws.addEventListener('open', onWSOpen)
     ws.addEventListener('message', onWSMessage)
@@ -92,7 +92,7 @@ function onWSOpen(data) {
 function sendMessage(){
     let text = document.getElementById('text');
     let nickname = document.getElementById('nick').value;
-    textToSend=nickname+": "+text.value;
+    textToSend=nickname + ": "+ text.value;
     msg = { typ: 'msg', tekst: textToSend };
     ws.send(JSON.stringify(msg));
     text.value="";
@@ -135,6 +135,7 @@ function getLocalization() {
 }
 
 function geoOk(data) {
+    document.querySelector(".location").style.display = "none"
     let coords = {
         lat: data.coords.latitude,
         lng: data.coords.longitude
@@ -142,11 +143,18 @@ function geoOk(data) {
     placeMyMarker(coords, 'new')
 }
 
-function geoFail(err) {
-    console.log(err)
+function geoFail(data) {
+    document.querySelector(".location").style.display = "flex"
+    document.querySelector(".text_location_fail").style.display = "flex"
 }
 
 function iconString(number)
 {
     return `icon/${number}.png`
+}
+
+function avatar(e){
+
+    let av = document.getElementById('MyAvatar').submit();
+    
 }
