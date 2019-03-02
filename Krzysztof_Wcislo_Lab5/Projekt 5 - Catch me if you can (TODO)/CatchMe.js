@@ -26,7 +26,7 @@ function initMap() {
         position: uluru,
         map: map,
         animation: google.maps.Animation.DROP,
-        icon: iconString()
+        icon: avatarIcon()
     });
     getLocalization()
     startWebSocket()
@@ -148,20 +148,34 @@ function geoFail(data) {
 }
 
 
-function iconString(){
 
-    if(document.getElementById('0').checked){
-        return `icon/0.png`
-    }else if(document.getElementById('1').checked){
-        return `icon/1.png`
-    }else if(document.getElementById('2').checked){
-        return `icon/2.png`
-    }else if(document.getElementById('3').checked){
-        return `icon/3.png`
-    }else if(document.getElementById('4').checked){
-        return `icon/4.png`
-    }else if(document.getElementById('5').checked){
-        return `icon/5.png`
+function avatarIcon(){
+
+    let x
+
+    if(document.getElementById("0").checked) {
+        number = 0
+        return `icon/${number}.png`
+    }
+    if(document.getElementById("1").checked) {
+        number = 1
+        return `icon/${number}.png`
+    }
+    if(document.getElementById("2").checked) {
+        number = 2
+        return `icon/${number}.png`
+    }
+    if(document.getElementById("3").checked) {
+        number = 3
+        return `icon/${number}.png`
+    }
+    if(document.getElementById("4").checked) {
+        number = 4
+        return `icon/${number}.png`
+    }
+    if(document.getElementById("5").checked) {
+        number = 5
+        return num`icon/${number}.png`
     }
 
 }
