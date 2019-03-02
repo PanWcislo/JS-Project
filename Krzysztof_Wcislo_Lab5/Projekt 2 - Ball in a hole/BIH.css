@@ -9,6 +9,7 @@ body{
     margin-top: 2%;
     width:96%;
     height:88%;
+    border-radius: 20px;
 }
 #board{
     margin-left: 2%;
@@ -20,6 +21,7 @@ body{
     position:absolute;
     top: 0;
     background: transparent;
+    border-radius: 20px;
 }
 #app {
     width: 100%;
