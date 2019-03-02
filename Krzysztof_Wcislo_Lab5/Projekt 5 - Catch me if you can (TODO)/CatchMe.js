@@ -151,7 +151,7 @@ function geoFail(data) {
 
 function avatarIcon(){
 
-    let x
+    let number
 
     if(document.getElementById("0").checked) {
         number = 0
