@@ -26,7 +26,7 @@ function initMap() { // funkcja inicjalizująca mape
         position: uluru,
         map: map,
         animation: google.maps.Animation.DROP,
-        icon: avatarIcon(icon)
+        icon: avatarIcon()
     });
     getLocalization() // wywołanie funkcji getLocalization
     startWebSocket() // logowanie do websocket
@@ -149,7 +149,27 @@ function geoFail(data) { // lozalizacja zablokowana odpalenie komunikatu
 
 
 
-function avatarIcon(nr){ // odpowiednia sciezka do ikony avatara
+function avatarIcon(){ // odpowiednia sciezka do ikony avatara
 
-    return `icon/${nr}.png`
+let number
+
+    if(document.getElementById('0').checked == true){
+        number = 0
+        return `icon/${number}.png`
+    }else if(document.getElementById('1').checked == true){
+        number = 1
+        return `icon/${number}.png`
+    }else if(document.getElementById('2').checked == true){
+        number = 2
+        return `icon/${number}.png`
+    }else if(document.getElementById('3').checked == true){
+        number = 3
+        return `icon/${number}.png`
+    }else if(document.getElementById('4').checked == true){
+        number = 4
+        return `icon/${number}.png`
+    }else if(document.getElementById('5').checked == true){
+        number = 5
+        return `icon/${number}.png`
+    }
 }
