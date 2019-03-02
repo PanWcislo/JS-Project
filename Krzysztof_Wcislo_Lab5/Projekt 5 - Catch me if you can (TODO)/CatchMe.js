@@ -14,48 +14,48 @@ function search(e) {
     }
 }
 
-function initMap() {
-    uluru = { lat: -25.363, lng: 131.044 };
+function initMap() { // funkcja inicjalizująca mape 
+    uluru = { lat: -25.363, lng: 131.044 }; // pozycja 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 8,
         center: uluru,
         keyboardShortcuts: false
     });
     
-    marker = new google.maps.Marker({
+    marker = new google.maps.Marker({ 
         position: uluru,
         map: map,
         animation: google.maps.Animation.DROP,
         icon: avatarIcon(icon)
     });
-    getLocalization()
-    startWebSocket()
+    getLocalization() // wywołanie funkcji getLocalization
+    startWebSocket() // logowanie do websocket
     watchKeys()
-    document.querySelector(".location").style.display = "flex"
+    document.querySelector(".location").style.display = "flex" 
 }
 
 
 function watchKeys() {
-    window.addEventListener('keydown', moveMarker)
+    window.addEventListener('keydown', moveMarker) // odczytaj ruch klawiatury przez marker
 }
 
-function moveMarker(ev) {
-    let coords = {
+function moveMarker(ev) { //porusz marker
+    let coords = { // wyspolrzedne markera
         lat: marker.getPosition().lat(),
         lng: marker.getPosition().lng()
     }
 
     switch (ev.code) {
-        case 'ArrowUp':
+        case 'ArrowUp': // ruch w górę
             coords.lat += 0.02
             break;
-        case 'ArrowDown':
+        case 'ArrowDown': // w dół
             coords.lat -= 0.02
             break;
-        case 'ArrowLeft':
+        case 'ArrowLeft': // w lewo
             coords.lng -= 0.02
             break;
-        case 'ArrowRight':
+        case 'ArrowRight': // w prawo
             coords.lng += 0.02
             break;
         default:
@@ -66,8 +66,8 @@ function moveMarker(ev) {
 
 function placeMyMarker(_coords, _action)
 {
-    marker.setPosition(_coords)
-    map.setCenter(_coords)
+    marker.setPosition(_coords) // pozycja markera
+    map.setCenter(_coords) // pozycja markera
 
     let me = {
         id: guid,
@@ -88,7 +88,7 @@ function onWSOpen(data) {
     console.log(data)
 }
 
-function sendMessage(){
+function sendMessage(){ // funkcja wysyłająca wiadomosci
     let text = document.getElementById('text');
     let nickname = document.getElementById('nick').value;
     textToSend=nickname + ": "+ text.value;
@@ -128,13 +128,13 @@ function onWSMessage(e) {
 }
 
 
-function getLocalization() {
+function getLocalization() { // wez lokalizację
     navigator.geolocation.getCurrentPosition(geoOk, geoFail)
 
 }
 
-function geoOk(data) {
-    document.querySelector(".location").style.display = "none"
+function geoOk(data) { // jesli lokalizacja zezwolona wykonaj ponizszy kod 
+    document.querySelector(".location").style.display = "none" // display zmieniony na none
     let coords = {
         lat: data.coords.latitude,
         lng: data.coords.longitude
@@ -142,14 +142,14 @@ function geoOk(data) {
     placeMyMarker(coords, 'new')
 }
 
-function geoFail(data) {
-    document.querySelector(".location").style.display = "flex"
-    document.querySelector(".text_location_fail").style.display = "flex"
+function geoFail(data) { // lozalizacja zablokowana odpalenie komunikatu
+    document.querySelector(".location").style.display = "flex" // display = "flex"
+    document.querySelector(".text_location_fail").style.display = "flex" // tekst informujacy o problemie
 }
 
 
 
-function avatarIcon(nr){
+function avatarIcon(nr){ // odpowiednia sciezka do ikony avatara
 
     return `icon/${nr}.png`
 }
