@@ -4,40 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="script.js"></script>
     <link rel="stylesheet" href="notepocet.css">
     <script src="notepocet.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div class="main-container">
-        <header class="header">
-            <h1>NotePocket</h1>
-        </header>
-    
-        <div class="content-container">
-                <button type="button" class="A" id="newNote">Dodaj nową notatka</button>
+      <div class = "title"><h1>Note Pocket</h1></div>
 
-                <div id="addNote" class="modal">
-                    <div>
-                        Tytuł
-                        <input type="text" id="title">
-                    </div>
-                    <div>
-                        Treść
-                        <textarea id="description"></textarea>
-                    </div>
-                    <div>
-                        Kolor
-                        <input type="color" id="color">
-                    </div>
-                    <div>
-                        <input type="checkbox" id="attach"> Przypięta
-                    </div>
-                    <button type="button" class="B" id="addNoteButton">Zapisz</button>
-                </div>
+    <div class = "container">
+        <div class = "row1">
+                <form>
+                    <label for="title">Title</label><br>
+                    <input type="text" name="title" id="title"><br>
+                    <label for="content">Content</label><br>
+                    <textarea name="content" cols="30" rows="10" id="content"></textarea><br>
+                    <label for="color">Color</label><br>
+                    <input type="color" name="color" id="title"><br>
+                    <input type="checkbox" id="attached"> Attached</input>
+                    <button type ="button" id="create" value = "CREATE">CREATE</button><br><br><br><br>
+                    <button type ="button" id="clean" value = "CLEAN ALL NOTES">CLEAN ALL NOTES</button>
+                </form>
+        </div>
+        <div class = "row2-notes">
+
+            
         </div>
     </div>
-
 </body>
 </html>
