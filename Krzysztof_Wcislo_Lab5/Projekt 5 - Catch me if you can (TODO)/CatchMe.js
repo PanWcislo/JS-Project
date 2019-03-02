@@ -2,11 +2,10 @@ let uluru, map, marker
 let ws
 let players = {}
 let nick = 'Gracz1'
-let sendButton = document.querySelector('button');
 let msg;
 let flag=false;
 let guid = parseInt(Date.now() + Math.random() * 1000) // unikatowy identyfikator
-let icon = guid % 5 // numer obrazka
+let icon
 
 
 function search(e) {
@@ -27,7 +26,7 @@ function initMap() {
         position: uluru,
         map: map,
         animation: google.maps.Animation.DROP,
-        icon: iconString(icon)
+        icon: iconString()
     });
     getLocalization()
     startWebSocket()
@@ -148,13 +147,21 @@ function geoFail(data) {
     document.querySelector(".text_location_fail").style.display = "flex"
 }
 
-function iconString(number)
-{
-    return `icon/${number}.png`
-}
 
-function avatar(e){
+function iconString(){
 
-    let av = document.getElementById('MyAvatar').submit();
-    
+    if(document.getElementById('0').checked){
+        return `icon/0.png`
+    }else if(document.getElementById('1').checked){
+        return `icon/1.png`
+    }else if(document.getElementById('2').checked){
+        return `icon/2.png`
+    }else if(document.getElementById('3').checked){
+        return `icon/3.png`
+    }else if(document.getElementById('4').checked){
+        return `icon/4.png`
+    }else if(document.getElementById('5').checked){
+        return `icon/5.png`
+    }
+
 }
