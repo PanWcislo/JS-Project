@@ -27,6 +27,7 @@ body {
     height: 100%;
     margin: 10px;
     float: left;
+    overflow-y:scroll;
 }
 input[type=text], textarea {
     width: 100%;
@@ -68,12 +69,21 @@ input[type=text], textarea {
     margin-bottom: 10px;
     width: 100%;
 }
-.note {
+.note1 {
     background-color: rgba(111, 80, 223, 0.788);
     margin: 10px;
     color: white;
     border-radius: 5px;
-    height: 200px;
+    height: 250px;
+    width: 25%;
+    float: left;
+}
+.note2 {
+    background-color: rgba(111, 80, 223, 0.788);
+    margin: 10px;
+    color: white;
+    border-radius: 5px;
+    height: 250px;
     width: 25%;
     float: left;
 }
@@ -87,7 +97,8 @@ input[type=text], textarea {
 }
 .content{
     padding: 10px;
-    height: 50%;
+    height: 55%;
+    overflow-y:scroll;
 }
 .note_text{
     margin: auto;
@@ -96,4 +107,15 @@ input[type=text], textarea {
     padding: 5px;
     height: 10%;
     background-color: rgba(111, 80, 223, 0.788);
+}
+.note_attached {
+    background-color: #005e7e;
+    border-radius: 5px;
+    font-size: 100%;
+    padding: 5px 10px;
+    text-align: center;
+    margin-right: 5px;
+    width: 50%;
+    height: 8%;
+    margin: 0 auto;
 }
