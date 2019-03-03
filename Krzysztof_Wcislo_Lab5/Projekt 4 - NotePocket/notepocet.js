@@ -4,7 +4,7 @@ window.addEventListener('load',(e)=>{
 
     if(typeof(Storage) !== undefined){
 
-        if(localStorage.getItem("NotePocket") === null){
+        if(localStorage.getItem("NotePocket") !== null){
             notes = JSON.parse(localStorage.getItem("NotePocket"))
         }
 
