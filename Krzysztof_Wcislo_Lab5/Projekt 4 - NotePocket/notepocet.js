@@ -4,9 +4,16 @@ window.addEventListener('load',(e)=>{
 
     if(typeof(Storage) !== undefined){
 
-        if(localStorage.getItem("NotePocket") !== null){
+        if(localStorage.getItem("NotePocket") === null){
             notes = JSON.parse(localStorage.getItem("NotePocket"))
         }
+
+        document.querySelector("#clean").addEventListener('click',(e)=>{
+
+            notes = []
+            localStorage.setItem('NotePocket', JSON.stringify(this.notes))
+            showNotes()
+        })
 
         document.querySelector("#create").addEventListener('click',(e)=>{
             
