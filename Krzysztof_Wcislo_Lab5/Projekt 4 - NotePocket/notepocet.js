@@ -1,3 +1,15 @@
+class Note{
+    constructor(_title,_content,_color,_attached){
+        this.id = parseInt(Date.now() + Math.random() * 1000)
+        this.title = _title
+        this.content= _content
+        this.color = _color
+        this.attached = _attached;
+        this.creationDate = new Date()
+    }
+
+}
+
 let notes = []
 
 window.addEventListener('load',(e)=>{
@@ -76,28 +88,30 @@ function showNotes(){
             list.innerHTML += renderNote(note)
         })
 
+    let removeButtons = document.querySelectorAll(".note_remove")
+        removeButtons.forEach(function(e){
+            id = parseInt(e.dataset.noteid)
+            e.addEventListener('click', () => removeNote(id))
+        })
+
 }
+
+function removeNote(id) 
+    {
+        notes = notes.filter(note => note.id !== id)
+        localStorage.setItem('NotePocket', JSON.stringify(this.Notes))
+        showNotes()
+    }
 
 function renderNote(note){
 
     return `<div class="note">
             <div class="note_title">${note.title} <span style="background-color:${note.color};" class="dot"></span></div>
-            <div class="note_createdtime">${new Date(note.createdTime).toLocaleString()}</div>
+            <div class="note_createdtime">${new Date(note.creationDate).toLocaleString()}</div>
             <div class="note_content">${note.content}</div>
             <div class="note_footer">
                 ${note.attached ? ' <div class="note_attached">Attached</div>' : ''}
                 <button data-noteid="${note.id}" class="note_remove">Remove</button>
             </div>
         </div>`
-}
-
-class Note{
-    constructor(_title,_content,_color,_priority){
-        this.title = _title
-        this.content= _content
-        this.color = _color
-        this.priority = _priority;
-        this.creationDate = new Date()
-    }
-
 }
