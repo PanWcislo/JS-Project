@@ -4,8 +4,17 @@ window.addEventListener('load',(e)=>{
 
     if(typeof(Storage) !== undefined){
 
-        if(localStorage.getItem("NotePocket") !== null){
-            notes = JSON.parse(localStorage.getItem("NotePocket"))
+        if(localStorage.getItem("NotePocket") === null){
+            this.Notes = [new Note('Hello programmer!', 'It is your first note.', '#ccc', true)]
+            return
+        }
+        try
+        {
+            notes = JSON.parse(localStorage.getItem('NotePocket'))
+        }
+        catch(ex)
+        {
+            notes = []
         }
 
         document.querySelector("#clean").addEventListener('click',(e)=>{
@@ -36,64 +45,10 @@ window.addEventListener('load',(e)=>{
 })
 
 function AddNote(title,content,color,attached){
-    notes.push(
-        new Note(title,content,color,attached)
-    )
+    notes.push(new Note(title.value,content.value,color.valie,attached.checked))
 
-    notes.sort(sortNotes)
-    showNotes()
-
-    let notesJSON = JSON.stringify(notes)
-    localStorage.setItem("NotePocket",notesJSON)
-}
-
-function showNotes(){
-    let list = document.querySelector(".row2-notes")
-    list.innerHTML=""
-
-    notes.forEach((elem)=>{
-        let card = document.createElement("div")
-        card.className="note1";
-
-        let attached1 = document.createElement('div')
-        attached1.className = "note_attached"
-        attached1.textContent = "Attached"
-
-        let content1 = document.createElement("div")
-        content1.className = "note_title"
-
-        let header = document.createElement("div")
-        header.className="header"
-        header.textContent = elem.title
-        header.style.color = elem.color
-
-        content1.appendChild(header)
-
-        let content2 = document.createElement("div")
-        content2.className="content"
-
-        let feed = document.createElement("div")
-        feed.className="note_text"
-        feed.textContent = elem.content
-        feed.style.color = elem.color
-
-        content2.appendChild(feed)
-
-        let date = document.createElement("div")
-        date.className="note_footer"
-        date.textContent += new Date(elem.creationDate).toLocaleString()
-        
-        card.appendChild(content1)
-        card.appendChild(content2)
-        card.appendChild(date)
-        list.appendChild(card)
-    })
-}
-
-function sortNotes(n1,n2){
-
-
-    if(n1.attached == true && n2.attached == false)
+    notes.sort(function(n1,n2){
+        if(n1.attached == true && n2.attached == false)
             return -1
 
         if(n1.attached == false && n2.attached == true)
@@ -105,6 +60,35 @@ function sortNotes(n1,n2){
             return 1
 
         return 0
+    })
+    localStorage.setItem('NotePocket', JSON.stringify(notes))
+    showNotes()
+
+    let notesJSON = JSON.stringify(notes)
+    localStorage.setItem("NotePocket",notesJSON)
+}
+
+function showNotes(){
+    let list = document.querySelector(".row2-notes")
+    list.innerHTML=""
+
+        notes.forEach(function(note){
+            list.innerHTML += renderNote(note)
+        })
+
+}
+
+function renderNote(note){
+
+    return `<div class="note">
+            <div class="note_title">${note.title} <span style="background-color:${note.color};" class="dot"></span></div>
+            <div class="note_createdtime">${new Date(note.createdTime).toLocaleString()}</div>
+            <div class="note_content">${note.content}</div>
+            <div class="note_footer">
+                ${note.attached ? ' <div class="note_attached">Attached</div>' : ''}
+                <button data-noteid="${note.id}" class="note_remove">Remove</button>
+            </div>
+        </div>`
 }
 
 class Note{
