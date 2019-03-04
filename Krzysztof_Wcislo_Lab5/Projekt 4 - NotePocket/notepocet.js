@@ -57,7 +57,7 @@ window.addEventListener('load',(e)=>{
 })
 
 function AddNote(title,content,color,attached){
-    notes.push(new Note(title.value,content.value,color.valie,attached.checked))
+    notes.push(new Note(title,content,color,attached))
 
     notes.sort(function(n1,n2){
         if(n1.attached == true && n2.attached == false)
