@@ -97,6 +97,7 @@ function removeNote(id) // usuń notatkę po id
         notes = notes.filter(note => note.id !== id)
         localStorage.setItem('NotePocket', JSON.stringify(notes))
         showNotes()
+
     }
 
 function renderNote(note){ // dodanie notatki względem kodu wypisanego ponizej(return)
