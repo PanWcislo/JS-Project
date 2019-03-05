@@ -13,7 +13,7 @@ let ball = {    // deklaracja kuli
 }
 
 //tablica do przechowywania współrzędnych wygenerowanych dołków
-let holeAmount = 25
+let holeAmount = 1
 let holes = []
 
 
@@ -59,7 +59,6 @@ function startGame(){
     window.addEventListener('deviceorientation', (e) => {Move(e) })
     updateTimer() //aktualizacja czasu
     document.getElementById('Point').innerHTML = "Score: " + "0" // punktacja startowa
-    document.getElementById('bestTime').innerHTML = "Best Time: " + T
 }
 
 function drawBall(){
@@ -170,7 +169,13 @@ function winGame(){
     alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ ((new Date().getTime()-time) / 1000) + "sekund") // informacja o wygranej i czasie 
     let T = document.getElementById('bestTime').innerHTML = "Best Time: " + ((new Date().getTime()-time) / 1000)
 
-    endGame()
+    if( T >= ((new Date().getTime() - time) /1000) )
+    {
+        T = (new Date().getTime() - time) / 1000
+        return T
+    }
+
+    endGame(T)
 }
 
 function loseGame(){ // funkcja wyswietlajaca komunikat o przegranej grze
@@ -200,7 +205,7 @@ function resetGame(){ // koniec gry
     console.log("... Game Ends")
 }
 
-function endGame(){ // koniec gry
+function endGame(T){ // koniec gry
     gameStarted = false // zmiana statusy na false
 
     document.querySelector("#start").style.display = "flex" // wyswietlenie ekranu powitalnego
