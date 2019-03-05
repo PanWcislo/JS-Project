@@ -86,15 +86,17 @@ function showNotes(){ // pokaż notatni
 
     let removeButtons = document.querySelectorAll(".note_remove") // usuń notatkę
         removeButtons.forEach(function(e){
-            id = parseInt(e.dataset.noteid)
-            e.addEventListener('click', () => removeNote(id))
+            let _id = parseInt(e.dataset.noteid)
+            e.addEventListener('click', function(){
+                removeNote(_id)
         })
+    })
 
 }
 
-function removeNote(id) // usuń notatkę po id
+function removeNote(_id) // usuń notatkę po id
     {
-        notes = notes.filter(note => note.id !== id)
+        notes = notes.filter(note => note.id !== _id)
         localStorage.setItem('NotePocket', JSON.stringify(notes))
         showNotes()
 

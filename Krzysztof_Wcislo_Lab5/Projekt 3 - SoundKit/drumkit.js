@@ -21,13 +21,13 @@ const channel4 = []
 
 let selectedChannel = 'ch1'  // domyślnie ustawiam kanał pierwszy jako wybrany
 
-let recStart = 0 // zmienna przechowująca czas rozpoczęcia nagrywania
+let recStart  = 0// zmienna przechowująca czas rozpoczęcia nagrywania
 let isRecording = false //zmienna przechowująca czy nagrywanie w toku
 
 // funkcja ustawiająca możliwe zdarzenia
 function appStart() {
     window.addEventListener('keypress', playBeCode)
-    document.querySelector('#play').addEventListener('click', playMusic)
+    document.querySelector('#play').addEventListener('click', playSound)
     document.querySelector('#rec').addEventListener('click', recMusic)
 
     document.querySelectorAll('input[name=channel]').forEach(function(radio){
@@ -114,7 +114,7 @@ function recMusic(e) {
     //zaktualizuj napis na buttonie
     if(isRecording){
         e.target.innerHTML = "Zakończ nagrywanie"
-        playAudio()
+        playSound()
     }
     else
         e.target.innerHTML = "Nagrywaj"
