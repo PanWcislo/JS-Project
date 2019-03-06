@@ -82,7 +82,7 @@ h2{
     background-color:rgba(185, 185, 185, 0.74);
     border-right: 1px solid black;
 }
-#bestTime{
+#LastTime{
     float: left;
     font-size: 5vh;
     width:25%;

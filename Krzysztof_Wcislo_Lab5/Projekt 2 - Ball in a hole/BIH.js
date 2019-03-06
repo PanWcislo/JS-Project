@@ -59,6 +59,7 @@ function startGame(){
     window.addEventListener('deviceorientation', (e) => {Move(e) })
     updateTimer() //aktualizacja czasu
     document.getElementById('Point').innerHTML = "Score: " + "0" // punktacja startowa
+    document.getElementById('LastTime').innerHTML = "Last Time: " + "0"
 }
 
 function drawBall(){
@@ -166,16 +167,11 @@ function getPoint(){ // dodaj punkt
 }
 
 function winGame(){
-    alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ ((new Date().getTime()-time) / 1000) + "sekund") // informacja o wygranej i czasie 
-    let T = document.getElementById('bestTime').innerHTML = "Best Time: " + ((new Date().getTime()-time) / 1000)
+    let TimeNow = ((new Date().getTime()-time) / 1000)
+    alert("Wygrałeś. Gratulacje! Zajęło ci to: "+ TimeNow + "sekund") // informacja o wygranej i czasie 
+    document.getElementById('LastTime').innerHTML = "Last Time: " + TimeNow
 
-    if( T >= ((new Date().getTime() - time) /1000) )
-    {
-        T = (new Date().getTime() - time) / 1000
-        return T
-    }
-
-    endGame(T)
+    endGame(TimeNow)
 }
 
 function loseGame(){ // funkcja wyswietlajaca komunikat o przegranej grze
@@ -195,7 +191,7 @@ function resetGame(){ // koniec gry
     points = 0
     holes.length = 0
     document.getElementById('Point').innerHTML = "Score: " + "0"
-    document.getElementById('bestTime').innerHTML = "Best Time: " + "0"
+    document.getElementById('LastTime').innerHTML = "Last Time: " + "0"
 
     window.removeEventListener("deviceorientation", (e) => { handleMove(e) }) 
 
@@ -215,7 +211,7 @@ function endGame(T){ // koniec gry
     points = 0
     holes.length = 0
     document.getElementById('Point').innerHTML = "Score: " + "0"
-    document.getElementById('bestTime').innerHTML = "Best Time: " + T
+    document.getElementById('LastTime').innerHTML = "Last Time: " + T
     
 
     window.removeEventListener("deviceorientation", (e) => { handleMove(e) }) 
