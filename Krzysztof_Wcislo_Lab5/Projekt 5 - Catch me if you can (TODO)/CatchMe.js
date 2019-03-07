@@ -3,48 +3,39 @@ let ws
 let players = {}
 let nick = 'Gracz1'
 let msg;
-let flag=false;
 let guid = parseInt(Date.now() + Math.random() * 1000) // unikatowy identyfikator
 let icon = guid % 6 // numer obrazka
+var Go = false
 
+function hideInitStartForm(){ // funkcja obsługi przycisku input submit 
+    let startForm = document.querySelector(".Start") // odwolanie do diva class Start
+    startForm.style.display = "none" // zmien display na niewidoczny
 
-function search(e) {
-    if(event.key == 'Enter') {
-        sendMessage();      
-    }
-}
-function initStartForm(){
-
-    document.querySelector("#StartMap").addEventListener('click', hideInitStartForm)
-
-
+    Go = true // przypisz zmiennej Go wartość true
+    initMap(Go) // zainicjuj mapę z wartością Go
 }
 
-function hideInitStartForm(){
-    startForm = document.querySelector("Start")
-    startForm.style.display = "none"
-
-    initMap()
-}
-
-function initMap() { // funkcja inicjalizująca mape 
-    uluru = { lat: -25.363, lng: 131.044 }; // pozycja 
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
-        center: uluru,
-        keyboardShortcuts: false
-    });
+function initMap(Go) { // funkcja inicjalizująca mape 
     
-    marker = new google.maps.Marker({ 
-        position: uluru,
-        map: map,
-        animation: google.maps.Animation.DROP,
-        icon: avatarIcon()
-    });
-    getLocalization() // wywołanie funkcji getLocalization
-    startWebSocket() // logowanie do websocket
-    watchKeys()
-    document.querySelector(".location").style.display = "flex" 
+    if(Go == true){ // jesli Go na wartośc true wyswietl mapę
+        uluru = { lat: -25.363, lng: 131.044 }; // pozycja 
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: uluru,
+            keyboardShortcuts: false
+        });
+
+        marker = new google.maps.Marker({ 
+            position: uluru,
+            map: map,
+            animation: google.maps.Animation.DROP,
+            icon: avatarIcon()
+        });
+        getLocalization() // wywołanie funkcji getLocalization
+        startWebSocket() // logowanie do websocket
+        watchKeys()
+        document.querySelector(".location").style.display = "flex" 
+    }
 }
 
 function watchKeys() {
@@ -109,6 +100,12 @@ function sendMessage(){ // funkcja wysyłająca wiadomosci
     text.value=""
 }
 
+function search() { // funkcja pozwalająca wysłąć wiadomośc po wcisnięciu klawisza enter
+    if(event.key == 'Enter') {
+        sendMessage();      
+    }
+}
+
 function onWSMessage(e) {
     let log = document.getElementById('log');
 
@@ -163,25 +160,25 @@ function geoFail(data) { // lozalizacja zablokowana odpalenie komunikatu
 
 function avatarIcon(){ // odpowiednia sciezka do ikony avatara
 
-let number
+let number // numer obrazka
 
     if(document.getElementById('0').checked == true){
-        number = 0
-        return `icon/${number}.png`
+        number = 0 // nr 0
+        return `icon/${number}.png` // wskaż sciezkę do avatara 0
     }else if(document.getElementById('1').checked == true){
-        number = 1
-        return `icon/${number}.png`
+        number = 1 // nr 1
+        return `icon/${number}.png` // wskaż sciezkę do avatara 1
     }else if(document.getElementById('2').checked == true){
-        number = 2
-        return `icon/${number}.png`
+        number = 2 // nr 2
+        return `icon/${number}.png` // wskaż sciezkę do avatara 2
     }else if(document.getElementById('3').checked == true){
-        number = 3
-        return `icon/${number}.png`
+        number = 3 // nr 3
+        return `icon/${number}.png` // wskaż sciezkę do avatara 3
     }else if(document.getElementById('4').checked == true){
-        number = 4
-        return `icon/${number}.png`
+        number = 4 // nr 4
+        return `icon/${number}.png` // wskaż sciezkę do avatara 4
     }else if(document.getElementById('5').checked == true){
-        number = 5
-        return `icon/${number}.png`
+        number = 5 // nr 5
+        return `icon/${number}.png` // wskaż sciezkę do avatara 5
     }
 }
