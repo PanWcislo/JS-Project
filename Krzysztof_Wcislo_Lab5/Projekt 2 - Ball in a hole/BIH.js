@@ -13,7 +13,7 @@ let ball = {    // deklaracja kuli
 }
 
 //tablica do przechowywania współrzędnych wygenerowanych dołków
-let holeAmount = 1
+let holeAmount = 25
 let holes = []
 
 
