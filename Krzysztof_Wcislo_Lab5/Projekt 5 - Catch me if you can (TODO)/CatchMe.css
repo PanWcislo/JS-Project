@@ -4,19 +4,14 @@
     border-radius: 40px;
 }
 #row1{
-    width: 10%;
+    width: 35%;
     height: 100%;
     float: left;
     margin: 10px;
+    padding-right: 10px;
 }
 #row2{
-    width: 30%;
-    height: 100%;
-    float: left;
-    margin: 10px;
-}
-#row3{
-    width: 53%;
+    width: 59%;
     height: 100%;
     margin: 10px;
     float: left;

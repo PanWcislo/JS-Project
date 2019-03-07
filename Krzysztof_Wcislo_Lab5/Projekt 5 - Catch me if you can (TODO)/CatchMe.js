@@ -13,8 +13,19 @@ function search(e) {
         sendMessage();      
     }
 }
+function initStartForm(){
 
-document.querySelector("#StartMap").addEventListener('click', initMap)
+    document.querySelector("#StartMap").addEventListener('click', hideInitStartForm)
+
+
+}
+
+function hideInitStartForm(){
+    startForm = document.querySelector("Start")
+    startForm.style.display = "none"
+
+    initMap()
+}
 
 function initMap() { // funkcja inicjalizująca mape 
     uluru = { lat: -25.363, lng: 131.044 }; // pozycja 
@@ -90,12 +101,12 @@ function onWSOpen(data) {
 }
 
 function sendMessage(){ // funkcja wysyłająca wiadomosci
-    let text = document.getElementById('text');
-    let nickname = document.getElementById('nick').value;
+    let text = document.getElementById('text')
+    let nickname = document.getElementById('nick').value.bold()
     textToSend=nickname + ": "+ text.value;
-    msg = { typ: 'msg', tekst: textToSend };
-    ws.send(JSON.stringify(msg));
-    text.value="";
+    msg = { typ: 'msg', tekst: textToSend }
+    ws.send(JSON.stringify(msg))
+    text.value=""
 }
 
 function onWSMessage(e) {
