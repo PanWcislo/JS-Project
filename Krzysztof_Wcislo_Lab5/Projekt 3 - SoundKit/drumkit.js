@@ -85,21 +85,21 @@ function playMusic(soundName){
     }
 }
 // funkcja dodająca obiekt dźwięku do aktywnego kanału
-function pushSound(object)
+function pushSound(a)
 {
     switch(selectedChannel)
             {
                 case 'ch1':
-                    channel1.push(object)
+                    channel1.push(a)
                     break;
                 case 'ch2':
-                    channel2.push(object)
+                    channel2.push(a)
                     break;
                 case 'ch3':
-                    channel3.push(object)
+                    channel3.push(a)
                     break;
                 case 'ch4':
-                    channel4.push(object)
+                    channel4.push(a)
                     break;
             }
 }

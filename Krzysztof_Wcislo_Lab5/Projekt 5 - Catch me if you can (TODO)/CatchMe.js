@@ -14,6 +14,8 @@ function search(e) {
     }
 }
 
+document.querySelector("#StartMap").addEventListener('click', initMap)
+
 function initMap() { // funkcja inicjalizująca mape 
     uluru = { lat: -25.363, lng: 131.044 }; // pozycja 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -33,7 +35,6 @@ function initMap() { // funkcja inicjalizująca mape
     watchKeys()
     document.querySelector(".location").style.display = "flex" 
 }
-
 
 function watchKeys() {
     window.addEventListener('keydown', moveMarker) // odczytaj ruch klawiatury przez marker
@@ -73,7 +74,7 @@ function placeMyMarker(_coords, _action)
         id: guid,
         action: _action,
         coords: _coords,
-        playericon: icon
+        playericon: avatarIcon()
     }
 
 }
