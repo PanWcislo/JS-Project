@@ -6,9 +6,17 @@ let msg;
 let guid = parseInt(Date.now() + Math.random() * 1000) // unikatowy identyfikator
 
 
+function CloseAndPlay(){
+    let start = document.querySelector(".Start")
+    start.style.display = "none"
+
+    document.querySelector(".StartAvatar").style.display = "flex"
+    
+}
+
 function hideInitStartForm(){ // funkcja obsługi przycisku input submit 
     
-    let startForm = document.querySelector(".Start") // odwolanie do diva class Start
+    let startForm = document.querySelector(".StartAvatar") // odwolanie do diva class Start
     startForm.style.display = "none" // zmien display na niewidoczny
 
     var Go = true // przypisz zmiennej Go wartość true

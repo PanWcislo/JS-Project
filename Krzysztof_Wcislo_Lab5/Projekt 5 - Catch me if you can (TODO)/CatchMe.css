@@ -3,6 +3,20 @@
     height: 100%;
     border-radius: 40px;
 }
+#none{
+    display: none;
+}
+.Start {
+    display: flex; 
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 0, 0);
+}
 #row1{
     width: 35%;
     height: 100%;
@@ -39,8 +53,8 @@ body{
     margin: 0 auto;
     height: 700px;
 }
-.Start {
-    display: flex; 
+.StartAvatar {
+    display: none; 
     justify-content: space-evenly;
     align-items: center;
     position: absolute;
