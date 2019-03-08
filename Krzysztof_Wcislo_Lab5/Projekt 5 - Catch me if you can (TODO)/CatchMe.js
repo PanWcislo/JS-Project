@@ -1,10 +1,10 @@
 let uluru, map, marker
 let ws
 let players = {}
-let nick = 'Gracz1'
+let nick = 'Player1'
 let msg;
 let guid = parseInt(Date.now() + Math.random() * 1000) // unikatowy identyfikator
-let icon = guid % 6 // numer obrazka
+
 var Go = false
 
 function hideInitStartForm(){ // funkcja obsługi przycisku input submit 

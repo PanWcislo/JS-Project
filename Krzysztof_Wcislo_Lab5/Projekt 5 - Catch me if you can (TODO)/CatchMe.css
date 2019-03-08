@@ -92,6 +92,16 @@ input[type=submit]{
   border-radius: 10px;
   cursor: pointer;
 }
+button{
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
 button:focus {outline:0;}
 button:hover {background-color: #45a049;}
 
