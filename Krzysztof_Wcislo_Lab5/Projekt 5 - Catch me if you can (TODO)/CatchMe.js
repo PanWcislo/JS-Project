@@ -5,13 +5,13 @@ let nick = 'Player1'
 let msg;
 let guid = parseInt(Date.now() + Math.random() * 1000) // unikatowy identyfikator
 
-var Go = false
 
 function hideInitStartForm(){ // funkcja obsługi przycisku input submit 
+    
     let startForm = document.querySelector(".Start") // odwolanie do diva class Start
     startForm.style.display = "none" // zmien display na niewidoczny
 
-    Go = true // przypisz zmiennej Go wartość true
+    var Go = true // przypisz zmiennej Go wartość true
     initMap(Go) // zainicjuj mapę z wartością Go
 }
 
