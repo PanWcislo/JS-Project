@@ -1,3 +1,3 @@
-# KrzysztofWcis-oLab5]
+# KrzysztofWcis-JavaScript
 
-Wkrótce projekty zostaną dokonczone
+Projekty JavaScript na zaliczenie
