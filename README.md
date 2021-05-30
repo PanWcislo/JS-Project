@@ -1,3 +1,3 @@
-# KrzysztofWcislo-JavaScript
+# JavaScript
 
-Projekty JavaScript na zaliczenie
+Projekty zaliczeniowe z JavaScript 
